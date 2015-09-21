@@ -1,0 +1,261 @@
+/**
+ * VGrid
+ * —————————————————————————————————————————————
+ * Author: Víctor Falcón
+ * Author website: http://victorfalcon.es
+ * Version: 1.0
+ */
+
+
+/**
+ * CONTENTS
+ *
+ *  1. - Width Variables
+ *  2. - Columns settings
+ *  3. - Body font-size
+ *  3. - Container
+ *  4. - Columns
+ *  4. - Clear fix Mixin
+ *  5. - Hide Mixins
+ *
+ */
+
+
+/*  1. - Width Variables
+————————————————————————————————————————————— */
+@sm-screen: (720px  + @padding-width*2);
+@md-screen: (940px  + @padding-width*2);
+@lg-screen: (1140px + @padding-width*2);
+@xl-screen: (@lg-screen * 20);
+
+
+
+/* 2. - Columns settings
+————————————————————————————————————————————— */
+@cols-per-row: 12;    // Columns per row
+@padding-width: 75px; // Padding between columns
+
+
+
+/* 3. - Body font-size
+————————————————————————————————————————————— */
+body {
+		// Change font size
+		// Use em for all the font-size in your custom css
+		font-size: 14px;
+		@media (min-width: @sm-screen) {
+				font-size: 14px;
+		}
+		@media (min-width: @md-screen) {
+				font-size: 14px;
+		}
+		@media (min-width: @lg-screen) {
+				font-size: 14px;
+		}
+}
+
+.container {.mk-container();}
+
+
+
+/* 3. - Container
+————————————————————————————————————————————— */
+.mk-container() {
+		.clearfix();
+		margin-left: auto;
+		margin-right: auto;
+		padding-left:  (@padding-width/2);
+		padding-right: (@padding-width/2);
+		width: 100%;
+
+		@media (min-width: @sm-screen) {
+			width: @sm-screen;
+		}
+		@media (min-width: @md-screen) {
+			width: @md-screen;
+		}
+		@media (min-width: @lg-screen) {
+			width: @lg-screen;
+		}
+}
+
+
+
+/* 4. - Columns
+————————————————————————————————————————————— */
+.col() {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	float: left;
+	padding-left:  (@padding-width/2);
+	padding-right: (@padding-width/2);
+}
+
+/* Make Columns Mixins
+*/
+.mk-xs-col(@columns) {
+		.col();
+		.nth-child-clear(@columns, 0, @sm-screen);
+
+		width: percentage(@columns / @cols-per-row);
+}
+.mk-sm-col(@columns) {
+		.col();
+		.nth-child-clear(@columns, @sm-screen, @md-screen);
+
+		@media (min-width: @sm-screen) {
+			width: percentage(@columns / @cols-per-row);
+		}
+}
+.mk-md-col(@columns) {
+		.col();
+		.nth-child-clear(@columns, @md-screen, @lg-screen);
+
+		@media (min-width: @md-screen) {
+			width: percentage(@columns / @cols-per-row);
+		}
+}
+.mk-lg-col(@columns) {
+		.col();
+		.nth-child-clear(@columns, @lg-screen, @xl-screen);
+
+		@media (min-width: @lg-screen) {
+			width: percentage(@columns / @cols-per-row);
+		}
+}
+
+/* Nth-Childs clear for columns
+*/
+.nth-child-clear(@columns, @min, @max) {
+	@temp-cols: (@cols-per-row/@columns);
+	@media (min-width: @min) and (max-width: @max) {
+		&:nth-child(@{temp-cols}n + 1 ) {
+			clear: left;
+		}
+	}
+}
+
+/* Offsets
+ */
+.mk-xs-offset(@columns) {
+	margin-left: percentage(@columns / @cols-per-row);
+}
+.mk-sm-offset(@columns) {
+	@media (min-width: @sm-screen) {
+		margin-left: percentage(@columns / @cols-per-row);
+	}
+}
+.mk-md-offset(@columns) {
+	@media (min-width: @md-screen) {
+		margin-left: percentage(@columns / @cols-per-row);
+	}
+}
+.mk-lg-offset(@columns) {
+	@media (min-width: @lg-screen) {
+		margin-left: percentage(@columns / @cols-per-row);
+	}
+}
+
+
+
+/* 4. - Clear fix Mixin
+————————————————————————————————————————————— */
+.clearfix() {
+	// Source: http://nicolasgallagher.com/micro-clearfix-hack/
+	&:before,
+	&:after {
+		content: ' ';
+		display: table;
+	}
+	&:after {
+		clear: both;
+	}
+}
+
+
+
+/* 5. - Hide Mixins
+————————————————————————————————————————————— */
+.xs-hide {
+		@media (max-width: @sm-screen) {
+				display: none!important;
+		}
+}
+.sm-hide {
+		@media (min-width: @sm-screen) and (max-width: @md-screen) {
+				display: none!important;
+		}
+}
+.md-hide {
+		@media (min-width: @md-screen) and (min-width: @lg-screen) {
+				display: none!important;
+		}
+}
+.lg-hide {
+		@media (min-width: @lg-screen) {
+				display: none!important;
+		}
+}
+
+
+
+/* 6. - Utilytis
+————————————————————————————————————————————— */
+.pull-right 		{float: right;}
+.pull-left 			{float: left;}
+.no-margin-top 		{margin-top: 0;}
+.no-margin-bottom 	{margin-bottom: 0;}
+.t-right 			{text-align: right;}
+.t-left 			{text-align: left;}
+.clear 				{.clearfix();}
+
+
+
+/* 7. - Grid classes
+————————————————————————————————————————————— */
+.grid-system(12);
+.grid-system(@index) when (@index > 0) {
+	.grid-@{index} {
+		.mk-xs-col(12);
+		.mk-sm-col(12);
+		.mk-md-col(@index);
+		.mk-lg-col(@index);
+	}
+	.grid-system(@index - 1);
+}
+
+
+
+/* 7.1. - Offsets classes
+————————————————————————————————————————————— */
+.offset-system(12);
+.offset-system(@index) when (@index > 0) {
+	.offset-xs-@{index} {.mk-xs-offset(@index);}
+	.offset-sm-@{index} {.mk-sm-offset(@index);}
+	.offset-md-@{index} {.mk-md-offset(@index);}
+	.offset-lg-@{index} {.mk-lg-offset(@index);}
+
+	.offset-system(@index - 1);
+}
+
+
+
+/* 8. - Spacing system
+————————————————————————————————————————————— */
+.spacing-system(60);
+.spacing-system(@index) when (@index > 0) {
+	.m-@{index} {margin: @index*1px !important;}
+	.m-t-@{index} {margin-top: @index*1px !important;}
+	.m-b-@{index} {margin-bottom: @index*1px !important;}
+	.m-r-@{index} {margin-right: @index*1px !important;}
+	.m-l-@{index} {margin-left: @index*1px !important;}
+
+	.p-@{index} {padding: @index*1px !important;}
+	.p-t-@{index} {padding-top: @index*1px !important;}
+	.p-b-@{index} {padding-bottom: @index*1px !important;}
+	.p-r-@{index} {padding-right: @index*1px !important;}
+	.p-l-@{index} {padding-left: @index*1px !important;}
+
+	.spacing-system(@index - 5);
+}
