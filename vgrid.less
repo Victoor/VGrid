@@ -10,14 +10,17 @@
 /**
  * CONTENTS
  *
- *  1. - Width Variables
- *  2. - Columns settings
- *  3. - Body font-size
- *  3. - Container
- *  4. - Columns
- *  4. - Clear fix Mixin
- *  5. - Hide Mixins
- *
+ *   1. - Width Variables
+ *   2. - Columns settings
+ *   3. - Body font-size
+ *   4. - Container
+ *   5. - Columns
+ *   6. - Clear fix Mixin
+ *   7. - Hide Mixins
+ *   8. - Utilytis
+ *   9. - Grid classes
+ *   10. - Offsets classes
+ *   11. - Spacing system
  */
 
 
@@ -33,7 +36,7 @@
 /* 2. - Columns settings
 ————————————————————————————————————————————— */
 @cols-per-row: 12;    // Columns per row
-@padding-width: 75px; // Padding between columns
+@padding-width: 30px; // Padding between columns
 
 
 
@@ -42,7 +45,7 @@
 body {
 		// Change font size
 		// Use em for all the font-size in your custom css
-		font-size: 14px;
+		font-size: 16px;
 		@media (min-width: @sm-screen) {
 				font-size: 14px;
 		}
@@ -58,7 +61,7 @@ body {
 
 
 
-/* 3. - Container
+/* 4. - Container
 ————————————————————————————————————————————— */
 .mk-container() {
 		.clearfix();
@@ -81,7 +84,7 @@ body {
 
 
 
-/* 4. - Columns
+/* 5. - Columns
 ————————————————————————————————————————————— */
 .col() {
 	box-sizing: border-box;
@@ -159,7 +162,7 @@ body {
 
 
 
-/* 4. - Clear fix Mixin
+/* 6. - Clear fix Mixin
 ————————————————————————————————————————————— */
 .clearfix() {
 	// Source: http://nicolasgallagher.com/micro-clearfix-hack/
@@ -175,7 +178,7 @@ body {
 
 
 
-/* 5. - Hide Mixins
+/* 7. - Hide Mixins
 ————————————————————————————————————————————— */
 .xs-hide {
 		@media (max-width: @sm-screen) {
@@ -200,7 +203,7 @@ body {
 
 
 
-/* 6. - Utilytis
+/* 8. - Utilytis
 ————————————————————————————————————————————— */
 .pull-right 		{float: right;}
 .pull-left 			{float: left;}
@@ -212,7 +215,7 @@ body {
 
 
 
-/* 7. - Grid classes
+/* 9. - Grid classes
 ————————————————————————————————————————————— */
 .grid-system(12);
 .grid-system(@index) when (@index > 0) {
@@ -222,12 +225,17 @@ body {
 		.mk-md-col(@index);
 		.mk-lg-col(@index);
 	}
+	.grid-xs-@{index} {.mk-xs-col(@index);}
+	.grid-sm-@{index} {.mk-sm-col(@index);}
+	.grid-md-@{index} {.mk-md-col(@index);}
+	.grid-lg-@{index} {.mk-lg-col(@index);}
+	
 	.grid-system(@index - 1);
 }
 
 
 
-/* 7.1. - Offsets classes
+/* 10. - Offsets classes
 ————————————————————————————————————————————— */
 .offset-system(12);
 .offset-system(@index) when (@index > 0) {
@@ -241,7 +249,7 @@ body {
 
 
 
-/* 8. - Spacing system
+/* 11. - Spacing system
 ————————————————————————————————————————————— */
 .spacing-system(60);
 .spacing-system(@index) when (@index > 0) {
