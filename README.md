@@ -21,7 +21,7 @@ First you set the with of your columns, the number of columns and the padding be
 ```
 
 ## Classes
-- You can made columns using mixins or using classes like `grid-$` where $ can be 1 to @cols-per-row.
+- You can made columns using mixins or using classes like `grid-$` where `$` can be 1 to `@cols-per-row`.
 - You can made columns for specific with using mixins or classes like `grid-xs-$`, `grid-sm-$`, `grid-md-$` or `grid-lg-$`.
 - You can offset columns using mixins or classes like `offset-xs-$`, `offset-sm-$`, `offset-md-$` or `offset-lg-$`.
 - And more thinks in code.
