@@ -2,7 +2,7 @@
 The best grid system ever made in LESS
 
 ## Settings
-First you set the with of your columns, the number of columns and the padding between.
+First you set the width of your columns, the number of columns and the padding between.
 
 ```
 /*  1. - Width Variables
