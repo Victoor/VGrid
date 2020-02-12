@@ -7,8 +7,8 @@ First you set the width of your columns, the number of columns and the padding b
 ```
 /*  1. - Width Variables
 ————————————————————————————————————————————— */
-@sm-screen: (720px  + @padding-width*2);
-@md-screen: (940px  + @padding-width*2);
+@sm-screen: (720px + @padding-width*2);
+@md-screen: (940px + @padding-width*2);
 @lg-screen: (1140px + @padding-width*2);
 @xl-screen: (@lg-screen * 20);
 
